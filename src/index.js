@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import liff from '@line/liff';
 import axios from 'axios';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import IndexPage from "./pages/index.jsx";
+import AddPage from "./pages/add.jsx";
 
 const Index = () => {
 
@@ -38,12 +41,18 @@ const Index = () => {
   }
   
   return (
-    <div>
+    <Router>
       <h1>Hello React!</h1>
       <div>user: {profile}</div>
       <div><button onClick={showProfile}>show profile</button></div>
       <button onClick={onClick}>API test</button>
-    </div>
+      <Route exact path="/">
+        <IndexPage name={profile}/>
+      </Route>
+      <Route path="/add">
+        <AddPage name={profile} />
+      </Route>
+    </Router>
   )
   ;
 };
