@@ -8,49 +8,32 @@ import AddPage from "./pages/add.jsx";
 
 const Index = () => {
 
-  const [profile, setProfile] = useState('noprofile')
+  const [user_info, setUserInfo] = useState({});
   useEffect(() => {
     liff.init({liffId: process.env.LIFF_ID}).then(() => {
       if(!liff.isLoggedIn()){
         liff.login({});
       }
-    })
-  }, [])
-
-  const onClick = () => {
-    axios.get('/api/').then(res => {
-      console.log(res);
-      alert(res.data);
-    });
-  }
-
-  const showProfile = () => {
-    liff.init({liffId: process.env.LIFF_ID}).then(() => {
-      if(!liff.isLoggedIn()){
-        liff.login({});
-      }else{
+      if(liff.isLoggedIn()){
         const access_token = liff.getAccessToken();
         axios.post('/api/login', { access_token: access_token }).then((res) => {
-          console.log(res.data);
-          setProfile(res.data.name);
+          setUserInfo(res.data);
         }).catch((err) => {
           console.log(err.message);
         })
       }
     })
-  }
-  
+  }, [])
+
   return (
     <Router>
       <h1>Hello React!</h1>
-      <div>user: {profile}</div>
-      <div><button onClick={showProfile}>show profile</button></div>
-      <button onClick={onClick}>API test</button>
+      <div>user: {user_info.name}</div>
       <Route exact path="/">
-        <IndexPage name={profile}/>
+        <IndexPage user={user_info}/>
       </Route>
       <Route path="/add">
-        <AddPage name={profile} />
+        <AddPage user={user_info} />
       </Route>
     </Router>
   )
