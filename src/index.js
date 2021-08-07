@@ -5,8 +5,6 @@ import axios from 'axios';
 
 const Index = () => {
 
-  console.log(process.env.LIFF_ID);
-
   const [profile, setProfile] = useState('noprofile')
   useEffect(() => {
     liff.init({liffId: process.env.LIFF_ID}).then(() => {
@@ -28,9 +26,13 @@ const Index = () => {
       if(!liff.isLoggedIn()){
         liff.login({});
       }else{
-        liff.getProfile().then(profile => {
-          setProfile(profile.displayName);
-        });
+        const access_token = liff.getAccessToken();
+        axios.post('/api/login', { access_token: access_token }).then((res) => {
+          console.log(res.data);
+          setProfile(res.data.name);
+        }).catch((err) => {
+          console.log(err.message);
+        })
       }
     })
   }
