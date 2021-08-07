@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const axios = require('axios');
-const { db } = require('../../firebase/index');
+const { exists } = require('../../firebase/users/exists');
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
@@ -36,8 +36,9 @@ router.post('/', function(req, res, next) {
       }
     }).then(data => {
       const user_data = data.data;
-      console.log(user_data);
-      res.status(200).send(user_data.displayName);
+      exists(user_data, (data) => {
+        res.status(200).send(data);
+      });
     }).catch((err) => {
       console.log(err);
       res.status(500).send('server error');

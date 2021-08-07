@@ -28,7 +28,8 @@ const Index = () => {
       }else{
         const access_token = liff.getAccessToken();
         axios.post('/api/login', { access_token: access_token }).then((res) => {
-          alert('success');
+          console.log(res.data);
+          setProfile(res.data.name);
         }).catch((err) => {
           console.log(err.message);
         })
