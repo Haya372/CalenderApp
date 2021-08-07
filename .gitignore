@@ -24,3 +24,6 @@ yarn-debug.log*
 yarn-error.log*
 
 /dist
+
+# firebase secret key
+calenderapp-firebase-adminKey.json
