@@ -27,3 +27,6 @@ yarn-error.log*
 
 # firebase secret key
 calenderapp-firebase-adminKey.json
+
+# https keys
+*.pem

@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www --babel-node",
-    "dev": "webpack-dev-server --config ./webpack.config.dev.js",
+    "start": "env-cmd -f ./.env nodemon ./bin/www --babel-node",
+    "dev": "webpack-dev-server --config ./webpack.config.dev.js --https true --key ./localhost-key.pem --cert ./localhost.pem",
     "build": "webpack --config ./webpack.config.js --mode production"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^5.2.7",
     "dotenv-webpack": "^7.0.3",
+    "env-cmd": "^10.1.0",
     "html-webpack-plugin": "^4.5.2",
     "nodemon": "^2.0.12",
     "style-loader": "^2.0.0",
