@@ -1,0 +1,40 @@
+.nice-dates-day::before {
+  background-color: #3f51b5;
+}
+
+.nice-dates-day:after {
+  border: 2px solid #3f51b5;
+}
+
+.wrapper {
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding-top: 12px;
+  border-bottom: 1px solid #777;
+}
+
+.wrapper:hover {
+  opacity: 0.7;
+}
+
+.date {
+  margin-right: 8px;
+}
+
+.label {
+  position: absolute;
+  color: #777;
+  top: 0px;
+  left: 4px;
+  font-size: 8px;
+  opacity: 0.8;
+}
+
+.modal-bottom {
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
