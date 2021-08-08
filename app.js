@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const session = require('express-session');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
@@ -11,6 +12,16 @@ const loginRouter  = require('./routes/api/login');
 
 var app = express();
 
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie:{
+    httpOnly: true,
+    secure: false,
+    maxage: 1000 * 60 * 60
+  }
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
