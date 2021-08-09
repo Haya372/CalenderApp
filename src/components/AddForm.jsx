@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import TextBox from "./TextBox.jsx";
-import CustomCalendar from "./CustomCalender.jsx";
+import CustomCalendar from "./CustomCalender.jsx"
+import TextField from '@material-ui/core/TextField';
 
 export default function AddForm(props){
   const [title, setTitle] = useState('');
   const [selectedDates, setSelectedDates] = useState([new Date()]);
   const [tag, setTag] = useState('');
-  const [all_day, setAllDay] = useState(false);
   const [memo, setMemo] = useState('');
   
   return (
@@ -16,6 +16,15 @@ export default function AddForm(props){
       <CustomCalendar
         selectedDates={selectedDates}
         setSelectedDates={setSelectedDates}
+      />
+      <TextField
+        label="備考"
+        multiline
+        rows={5}
+        value={memo}
+        variant="outlined"
+        fullWidth
+        onChange={(e) => setMemo(e.target.value)}
       />
     </div>
   )
