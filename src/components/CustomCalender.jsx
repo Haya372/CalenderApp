@@ -6,6 +6,8 @@ import { Calendar } from 'react-nice-dates'
 import './CustomCalender.css'
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import Modal from './Modal.jsx';
+import { useEffect } from 'react'
+import TimeForm from './TimeForm.jsx'
 
 // Very rough implementation of multiple date selection
 
@@ -28,6 +30,9 @@ const dateFormat = (date) => {
 
 export default function CustomCalendar(props) {
   const [modal, setModal] = useState(false);
+  const now = new Date();
+  now.setMinutes(0);
+  const [time, setTime] = useState(now);
 
   const modifiers = {
     selected: date => props.selectedDates.some(selectedDate => isSameDay(selectedDate, date))
@@ -37,9 +42,12 @@ export default function CustomCalendar(props) {
       return checkDate(date, item)
     });
     if(idx !== -1){
+      // すでに選択済みの日にちを選んでいたら
       const newArray = props.selectedDates.filter((item) => !checkDate(item, date));
       props.setSelectedDates(newArray.sort((a, b) => a - b));
     }else{
+      date.setHours(time.getHours());
+      date.setMinutes(time.getMinutes());
       props.setSelectedDates([...props.selectedDates, date].sort((a, b) => a - b))
     }
   }
@@ -48,18 +56,36 @@ export default function CustomCalendar(props) {
     setModal(true);
   }
 
+  useEffect(() => {
+    const hour = time.getHours();
+    const minute = time.getMinutes();
+    const newArray = props.selectedDates.map((item) => {
+      item.setHours(hour);
+      item.setMinutes(minute);
+      return item;
+    });
+    props.setSelectedDates(newArray);
+  }, [time]);
+
   return (
     <div>
-      <div className="wrapper" onClick={openModal}>
-        <div className="label">日付</div>
-        <div className="date">
-          {dateFormat(props.selectedDates[0])}
-          {props.selectedDates.length > 1 ?
-          " ..."
-        : ""
-        }
+      <div className="flex">
+        <div>
+          <div className="label">日付</div>
+          <div className="wrapper" onClick={openModal}>
+            <div className="date">
+              {dateFormat(props.selectedDates[0])}
+              {props.selectedDates.length > 1 ?
+              " ..."
+            : ""
+            }
+            </div>
+            <CalendarTodayIcon />
+          </div>
         </div>
-        <CalendarTodayIcon />
+        <div>
+          <TimeForm time={time} onChangeTime={setTime} label="開始時間"/>
+        </div>
       </div>
       { modal ?
         <Modal setModal={setModal}>

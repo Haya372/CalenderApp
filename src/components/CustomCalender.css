@@ -6,12 +6,19 @@
   border: 2px solid #3f51b5;
 }
 
+.flex {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+}
+
 .wrapper {
   display: flex;
   position: relative;
   align-items: center;
-  padding-top: 12px;
   border-bottom: 1px solid #777;
+  flex-grow: 1;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 .wrapper:hover {
@@ -19,15 +26,15 @@
 }
 
 .date {
-  margin-right: 8px;
+  margin-right: 24px;
+  padding: 4px 0 7px;
 }
 
 .label {
-  position: absolute;
   color: #777;
-  top: 0px;
-  left: 4px;
-  font-size: 8px;
+  font-size: 12px;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
   opacity: 0.8;
 }
 
