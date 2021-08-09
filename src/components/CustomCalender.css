@@ -1,0 +1,47 @@
+.nice-dates-day::before {
+  background-color: #3f51b5;
+}
+
+.nice-dates-day:after {
+  border: 2px solid #3f51b5;
+}
+
+.flex {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.wrapper {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-bottom: 1px solid #777;
+  flex-grow: 1;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.wrapper:hover {
+  opacity: 0.7;
+}
+
+.date {
+  margin-right: 24px;
+  padding: 4px 0 7px;
+}
+
+.label {
+  color: #777;
+  font-size: 12px;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.modal-bottom {
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
