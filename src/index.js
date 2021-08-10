@@ -9,22 +9,21 @@ import AddPage from "./pages/add.jsx";
 const Index = () => {
 
   const [user_info, setUserInfo] = useState({});
-  /*useEffect(() => {
+  useEffect(() => {
     liff.init({liffId: process.env.LIFF_ID}).then(() => {
       if(!liff.isLoggedIn()){
         liff.login({});
       }
       if(liff.isLoggedIn()){
-        const access_token = liff.getAccessToken();
-        liff.getProfile().then(res => console.log(res))
-        axios.post('/api/login', { access_token: access_token }).then((res) => {
+        const access_token = "test" //liff.getAccessToken();
+        axios.post('/api/login', { access_token: access_token, user_id: localStorage.getItem('user_id') }).then((res) => {
           setUserInfo(res.data);
         }).catch((err) => {
           console.log(err.message);
         })
       }
     })
-  }, [])*/
+  }, [])
 
   return (
     <Router>

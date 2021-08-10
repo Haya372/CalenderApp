@@ -15,7 +15,7 @@ var app = express();
 app.use(session({
   secret: 'secret',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie:{
     httpOnly: true,
     secure: false,
@@ -29,10 +29,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist')));
 
+app.use('/api/login', loginRouter);
+
+app.use((req, res, next) => {
+  if(!req.session.user_id && req.method !== "GET"){
+    // GETメソッドは許可してしまって今のところ何も問題ないはず
+    res.status(500).send('Forbitton');
+    return;
+  }
+  console.log(req.session.user_id);
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
-app.use('/api/login', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
