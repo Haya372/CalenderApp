@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const apiRouter = require('./routes/api');
 const loginRouter  = require('./routes/api/login');
+const schedulesRouter = require('./routes/api/schedules');
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/api/schedules', schedulesRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);

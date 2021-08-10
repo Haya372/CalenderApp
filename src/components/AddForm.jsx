@@ -4,6 +4,7 @@ import CustomCalendar from "./CustomCalender.jsx"
 import TextField from '@material-ui/core/TextField';
 import styles from './AddForm.module.css';
 import Button from '@material-ui/core/Button';
+import axios from "axios";
 
 export default function AddForm(props){
   const [title, setTitle] = useState('');
@@ -13,7 +14,17 @@ export default function AddForm(props){
 
   const onClick = () => {
     // 提出処理
-    console.log('提出します')
+    const data = {
+      title: title,
+      dates: selectedDates,
+      tag: tag,
+      memo: memo
+    }
+    console.log('提出')
+    axios.post('/api/schedules', { data: data }).then((res) => {
+      console.log(res.data);
+      alert(res.data);
+    }).catch(err => alert('server error'));
   }
   
   return (
