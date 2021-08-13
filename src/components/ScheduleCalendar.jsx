@@ -60,6 +60,10 @@ export default function ScheduleCalendar(props){
     return styles.dateTile;
   }
 
+  const onActiveStartDateChange = (prop) => {
+    props.onCalendarBeginChange(prop.activeStartDate);
+  }
+
   return (
     <div>
       <Calendar
@@ -69,6 +73,7 @@ export default function ScheduleCalendar(props){
         tileContent={tileContent}
         tileClassName={tileClassName}
         view="month"
+        onActiveStartDateChange={onActiveStartDateChange}
         className={styles.calendar}
       />
     </div>

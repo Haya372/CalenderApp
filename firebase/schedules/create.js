@@ -6,9 +6,10 @@ function create(user_id, data, cb){
   new Promise((resolve, reject) => {
     try {
       data.dates.forEach((date) => {
+        const start_at = new Date(date);
         const newSchedule = {
           title: data.title,
-          start_at: date,
+          start_at: start_at.getTime(),
           tag: data.tag,
           memo: data.memo
         };
