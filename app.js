@@ -33,9 +33,9 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/api/login', loginRouter);
 
 app.use((req, res, next) => {
-  if(!req.session.user_id && req.method !== "GET"){
+  if(!req.session.user_id){
     // GETメソッドは許可してしまって今のところ何も問題ないはず
-    res.status(500).send('Forbitton');
+    res.status(403).send('Forbitton');
     return;
   }
   console.log(req.session.user_id);
