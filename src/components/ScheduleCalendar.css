@@ -1,0 +1,11 @@
+.react-calendar__tile:enabled:hover, .react-calendar__tile:enabled:focus {
+  outline: 2px solid gray;
+  outline-offset: -2px;
+  background-color: transparent;
+}
+
+.react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
+  background: #006edc;
+  outline: 2px solid #003f7e;
+  outline-offset: -2px;
+}
