@@ -18,7 +18,27 @@ export default function IndexPage(props){
       const data = res.data;
       console.log(data)
       setSchedules(data.schedules);
-    }).catch((err) => console.log(err));
+    }).catch((err) => {
+      if(err.response.data === "Forbitton"){
+        // LIFF環境ではLIFFを使った処理に書き換える
+        const access_token = "test";
+        axios.post('/api/login', { access_token: access_token, user_id: localStorage.getItem('user_id') }).then((res) => {
+          axios.get('/api/schedules/', {
+            params: {
+              year: year,
+              month: month
+            }
+          }).then((res) => {
+            const data = res.data;
+            console.log(data)
+            setSchedules(data.schedules);
+          });
+        }).catch((err) => {
+          console.log(err.message);
+        });
+      }
+      console.log(err)
+    });
   }, [calendarBegin]);
 
   const onCalendarBeginChange = (newValue) => {
