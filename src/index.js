@@ -5,11 +5,13 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import IndexPage from "./pages/index.jsx";
 import AddPage from "./pages/add.jsx";
+import Header from "./components/Header.jsx";
+import './styles.css';
 
 const Index = () => {
-
   const [user_info, setUserInfo] = useState({});
-  useEffect(() => {
+
+  const login = () => {
     liff.init({liffId: process.env.LIFF_ID}).then(() => {
       if(!liff.isLoggedIn()){
         liff.login({});
@@ -23,12 +25,11 @@ const Index = () => {
         })
       }
     })
-  }, [])
+  }
 
   return (
     <Router>
-      <h1>Hello React!</h1>
-      <div>user: {user_info.name}</div>
+      <Header user_data={user_info} login={login} />
       <Route exact path="/">
         <IndexPage user={user_info}/>
       </Route>
