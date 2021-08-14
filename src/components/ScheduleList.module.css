@@ -1,0 +1,41 @@
+.wrapper {
+  padding: 16px;
+}
+
+.flexWrapper{
+  display: flex;
+  justify-content: center;
+}
+
+.time {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 200;
+  margin: auto;
+  margin-right: 16px;
+}
+
+.content {
+  flex-grow: 1;
+  width: 100%;
+  margin-left: 16px;
+}
+
+.title {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.label {
+  margin-top: 4px;
+  color: #777;
+  font-size: 10px;
+}
+
+.memo {
+  font-size: 12px;
+}
+
+.card:hover {
+  opacity: 0.7;
+}
