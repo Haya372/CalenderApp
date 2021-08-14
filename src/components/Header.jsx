@@ -5,14 +5,19 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
 import styles from './Header.module.css';
+import { useSelector } from "react-redux";
+import Avatar from '@material-ui/core/Avatar';
+import { useHistory } from 'react-router';
 
 
 export default function Header(props) {
+  const pictureUrl = useSelector(state => state.user.pictureUrl);
+  const history = useHistory();
 
-  const createAvatar = (user_data) => {
-    if(user_data.pictureUrl){
+  const createAvatar = () => {
+    if(pictureUrl){
       return (
-        <Avatar alt="user_avatar" src={user_data.pictureUrl} />
+        <Avatar alt="user_avatar" src={pictureUrl} />
       )
     }
     return <AccountCircleTwoToneIcon />
@@ -25,9 +30,9 @@ export default function Header(props) {
           <Typography variant="h6" className={styles.title}>
             Header
           </Typography>
-          { Object.keys(props.user_data).length > 0
-          ? createAvatar(props.user_data)
-          : <Button color="inherit" onClick={props.login}>ログイン</Button>
+          { pictureUrl
+          ? createAvatar()
+          : <Button color="inherit" onClick={() => history.push('/login')}>ログイン</Button>
           }
         </Toolbar>
       </AppBar>
