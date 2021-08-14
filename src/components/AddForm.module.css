@@ -10,3 +10,25 @@
   margin-top: 16px;
   text-align: center;
 }
+
+.modalCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 640px;
+}
+
+.modalButtonsWrapper {
+  display: flex;
+  padding: 16px;
+  justify-content: space-around;
+}
+
+@media(max-width: 639px) {
+  .modalCenter {
+    width: 100%;
+    left: 0px;
+    transform: translate(0, -50%);
+  }
+}
