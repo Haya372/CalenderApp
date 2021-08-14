@@ -36,6 +36,9 @@
   font-size: 12px;
 }
 
+.card {
+  margin-bottom: 8px;
+}
 .card:hover {
   opacity: 0.7;
 }
