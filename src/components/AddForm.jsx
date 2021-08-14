@@ -35,7 +35,12 @@ export default function AddForm(props){
       setTitle('');
       setMemo('');
       setSelectedDates([new Date()]);
-    }).catch(err => alert('server error'));
+    }).catch(err => {
+      if(err.response.data === "Forbitton"){
+        history.push('/login');
+      }
+      console.log(err.response);
+    });
   }
   
   return (

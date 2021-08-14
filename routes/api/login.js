@@ -1,26 +1,29 @@
 var express = require('express');
 var router = express.Router();
 const axios = require('axios');
+const { create } = require('../../firebase/users/create');
 const { exists } = require('../../firebase/users/exists');
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
   const token = req.body.access_token;
-  if(!token){
-    res.status(400).send("id token is required");
+  if(!token && !req.body.line_id){
+    res.status(400).send("id or token is required");
     return;
   }
-  if(req.session.user_id){
-    console.log('You have already logged in');
-    res.status(200).send('You have already logged in');
+
+  if(req.body.line_id){
+    exists(req.body.line_id, (data) => {
+      if(!data){
+        res.status(404).send("Not found");
+        return;
+      }
+      req.session.user_id = data.user_id;
+      res.status(200).send(data);
+    });
     return;
   }
-  if(req.body.user_id){
-    // ここの処理は後で削除する
-    req.session.user_id = req.body.user_id;
-    res.status(200).send({ user_id: req.body.user_id });
-    return;
-  }
+
   axios.get('https://api.line.me/oauth2/v2.1/verify', {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -28,7 +31,7 @@ router.post('/', function(req, res, next) {
     params: {
       access_token: token,
     }
-}).then(response => {
+  }).then(response => {
     const verify = response.data;
     // verify access token
     if(verify.client_id !== process.env.LIFF_CHANNEL_ID){
@@ -47,7 +50,7 @@ router.post('/', function(req, res, next) {
       }
     }).then(data => {
       const user_data = data.data;
-      exists(user_data, (data) => {
+      create(user_data, (data) => {
         req.session.user_id = data.user_id;
         res.status(200).send(data);
       });
