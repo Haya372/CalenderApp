@@ -29,10 +29,16 @@
   background-color: rgba(255, 66, 66, 1);
   margin-bottom: 2px;
   font-size: 14px;
+  height: 1.5em;
+  overflow: hidden;
 }
 
-.listContent:hover {
-  opacity: 0.7;
+.modalBottom {
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 
 @media(max-width: 639px) {

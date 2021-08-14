@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import styles from "./ScheduleCalendar.module.css";
 import './ScheduleCalendar.css';
+import Modal from './Modal.jsx';
+import ScheduleList from "./ScheduleList.jsx";
 
 const dateFormat = (date) => {
   const year = date.getFullYear();
@@ -15,6 +17,14 @@ const dateFormat = (date) => {
 
 export default function ScheduleCalendar(props){
   const [date, setDate] = useState(new Date());
+  const [modal, setModal] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  useEffect(() => {
+    if(!modal){
+      setSelectedDate(null);
+    }
+  }, [modal]);
 
   const formatDay = (locale, date) => {
     return date.getDate();
@@ -34,19 +44,20 @@ export default function ScheduleCalendar(props){
       return <div className={styles.dateTileContent}></div>;
     }
     const listItems = data.map((item) => {
-      const onClick = () => {
-        console.log(item.id + "がクリックされました");
-        // routerの処理を追加する
-
-      }
       return (
-        <li onClick={onClick} className={styles.listContent} key={item.id}>
+        <li className={styles.listContent} key={item.id}>
           {item.title}
         </li>
       )
     })
+
+    const onClick = () => {
+      setSelectedDate(date);
+      setModal(true);
+    }
+
     return (
-      <div className={styles.dateTileContent}>
+      <div className={styles.dateTileContent} onClick={onClick}>
         <ul className={styles.ulWrapper}>{listItems}</ul>
       </div>
     )
@@ -76,6 +87,14 @@ export default function ScheduleCalendar(props){
         onActiveStartDateChange={onActiveStartDateChange}
         className={styles.calendar}
       />
+      {modal ? 
+      <Modal setModal={setModal}>
+        <div className={styles.modalBottom}>
+          <ScheduleList schedules={props.schedules[dateFormat(selectedDate)]} />
+        </div>
+      </Modal>
+      :null
+      }
     </div>
   )
 }
