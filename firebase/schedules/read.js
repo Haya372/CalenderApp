@@ -40,6 +40,21 @@ function read(user_id, year, month, cb){
   })
 }
 
+function readOne(user_id, schedule_id, cb){
+  const docRef = db.collection('datas').doc(user_id).collection('schedules').doc(schedule_id);
+  docRef.get().then(doc => {
+    if(!doc.exists){
+      if(typeof cb === 'function') cb();
+      return;
+    }
+    const data = doc.data();
+    if(typeof cb === 'function') cb({
+      id: doc.id,
+      ...data
+    });
+  })
+}
+
 module.exports = {
-  read,
+  read, readOne
 }

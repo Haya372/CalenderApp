@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { create } = require('../../firebase/schedules/create');
-const { read } = require('../../firebase/schedules/read');
+const { read, readOne } = require('../../firebase/schedules/read');
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
@@ -27,6 +27,18 @@ router.get('/', function(req, res, next) {
     res.status(200).send({
       schedules: result
     });
+  });
+});
+
+router.get('/:schedule_id', function(req, res, next){
+  const user_id = req.session.user_id;
+  const schedule_id = req.params.schedule_id;
+  readOne(user_id, schedule_id, (result) => {
+    if(!result){
+      res.status(404).send('not found');
+      return;
+    }
+    res.status(200).send(result);
   });
 });
 
