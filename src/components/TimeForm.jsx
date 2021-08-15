@@ -11,6 +11,7 @@ export default function TimeForm(props){
         value={props.time}
         minutesStep={5}
         onChange={props.onChangeTime}
+        disabled={props.disabled}
       />
     </MuiPickersUtilsProvider>
   )

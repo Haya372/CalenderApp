@@ -53,7 +53,7 @@ export default function CustomCalendar(props) {
   }
 
   const openModal = () => {
-    setModal(true);
+    if(!props.disabled) setModal(true);
   }
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function CustomCalendar(props) {
           </div>
         </div>
         <div>
-          <TimeForm time={time} onChangeTime={setTime} label="開始時間"/>
+          <TimeForm time={time} onChangeTime={setTime} label="開始時間" disabled={props.disabled} />
         </div>
       </div>
       { modal ?
