@@ -5,6 +5,7 @@ import IndexPage from "./pages/index.jsx";
 import AddPage from "./pages/add.jsx";
 import LoginPage from "./pages/login.jsx";
 import Header from "./components/Header.jsx";
+import SchedulePage from "./pages/schedule.jsx";
 import { Provider } from "react-redux";
 import store from './store/index.js';
 import './styles.css';
@@ -24,6 +25,9 @@ const Index = () => {
         </Route>
         <Route path="/login">
           <LoginPage />
+        </Route>
+        <Route path="/schedule/:id">
+          <SchedulePage />
         </Route>
         <div id="modal" />
       </Router>

@@ -16,7 +16,8 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve('dist'),
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: '/'
   },
   module: {
     rules: [
