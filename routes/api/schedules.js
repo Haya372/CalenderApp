@@ -59,4 +59,18 @@ router.patch('/:schedule_id', function(req, res, next){
   });
 });
 
+router.delete('/:schedule_id', function(req, res, next){
+  const user_id = req.session.user_id;
+  const schedule_id = req.params.schedule_id;
+  const docRef = db.collection('datas').doc(user_id).collection('schedules');
+  docRef.doc(schedule_id).delete().then(() => {
+    res.status(200).send({
+      id: schedule_id,
+    });
+  }).catch(err => {
+    console.log(err);
+    res.status(500).send('server error');
+  });
+});
+
 module.exports = router;
