@@ -6,6 +6,7 @@ import liff from '@line/liff';
 import { useDispatch } from "react-redux";
 import { setUser } from '../store/auth.js';
 import { useSelector } from "react-redux";
+import Layout from '../components/Layout.jsx';
 
 export default function IndexPage(props){
   const [schedules, setSchedules] = useState({});
@@ -65,12 +66,12 @@ export default function IndexPage(props){
   }
 
   return (
-    <div>
+    <Layout header={`${calendarBegin.getFullYear()}年${calendarBegin.getMonth() + 1}月`} home={true}>
       <ScheduleCalendar
         schedules={schedules}
         calendarBegin={calendarBegin}
         onCalendarBeginChange={onCalendarBeginChange}
       />
-    </div>
+    </Layout>
   )
 }

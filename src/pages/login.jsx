@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import Button from '@material-ui/core/Button';
-import { useDispatch } from "react-redux";
 import liff from '@line/liff';
 import { useHistory } from 'react-router';
+import Layout from '../components/Layout.jsx';
 
 export default function LoginPage() {
   const history = useHistory();
@@ -17,8 +17,8 @@ export default function LoginPage() {
   }
 
   return (
-  <div>
+  <Layout title="ログイン" home={false}>
     <Button variant="contained" onClick={login}>LINEログイン</Button>
-  </div>
+  </Layout>
   )
 }

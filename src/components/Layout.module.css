@@ -1,0 +1,30 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main {
+  flex-grow: 1;
+  height: 100%;
+  width: 640px;
+  margin: auto;
+}
+
+.navigate {
+  margin-right: auto;
+  margin-top: 16px;
+}
+
+.contents {
+  margin-top: 16px;
+}
+
+
+@media(max-width: 639px) {
+  .main {
+    width: 100%;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+}

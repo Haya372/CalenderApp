@@ -45,7 +45,6 @@ export default function AddForm(props){
   
   return (
     <div>
-      <h1>Add form</h1>
       <TextBox value={title} onChange={(e) => setTitle(e.target.value)} />
       <div className={styles.mt}>
         <CustomCalendar
