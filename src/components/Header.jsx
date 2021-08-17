@@ -28,7 +28,7 @@ export default function Header(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={styles.title}>
-            Header
+            {props.text}
           </Typography>
           { pictureUrl
           ? createAvatar()
