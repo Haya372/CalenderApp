@@ -51,6 +51,7 @@ export default function AddForm(props){
         <CustomCalendar
           selectedDates={selectedDates}
           setSelectedDates={setSelectedDates}
+          has_many={true}
         />
       </div>
       <div className={styles.mtLarge}>

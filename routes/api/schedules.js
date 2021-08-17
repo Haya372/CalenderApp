@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const { create } = require('../../firebase/schedules/create');
 const { read, readOne } = require('../../firebase/schedules/read');
+const { db } = require('../../firebase/index');
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
@@ -39,6 +40,22 @@ router.get('/:schedule_id', function(req, res, next){
       return;
     }
     res.status(200).send(result);
+  });
+});
+
+router.patch('/:schedule_id', function(req, res, next){
+  const user_id = req.session.user_id;
+  const schedule_id = req.params.schedule_id;
+  const data = req.body.data;
+  const docRef = db.collection('datas').doc(user_id).collection('schedules');
+  docRef.doc(schedule_id).set(data).then(() => {
+    res.status(200).send({
+      id: schedule_id,
+      data: data
+    });
+  }).catch(err => {
+    console.log(err);
+    res.status(500).send('server error');
   });
 });
 

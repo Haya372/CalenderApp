@@ -37,7 +37,7 @@ export default function SchedulePage(props){
           onClick={onClick}
         >ホームへ戻る</Button>
         { Object.keys(schedule).length
-        ? <ScheduleView schedule={schedule} />
+        ? <ScheduleView schedule={schedule} onUpdate={setSchedule}/>
         : <CircularProgress />
         }
         </div>
