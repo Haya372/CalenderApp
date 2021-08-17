@@ -38,18 +38,24 @@ export default function CustomCalendar(props) {
     selected: date => props.selectedDates.some(selectedDate => isSameDay(selectedDate, date))
   }
   const handleDayClick = date => {
-    const idx = props.selectedDates.findIndex(item => {
-      return checkDate(date, item)
-    });
-    if(idx !== -1){
-      // すでに選択済みの日にちを選んでいたら
-      const newArray = props.selectedDates.filter((item) => !checkDate(item, date));
-      props.setSelectedDates(newArray.sort((a, b) => a - b));
-    }else{
-      date.setHours(time.getHours());
-      date.setMinutes(time.getMinutes());
-      props.setSelectedDates([...props.selectedDates, date].sort((a, b) => a - b))
+    if(props.has_many){
+      const idx = props.selectedDates.findIndex(item => {
+        return checkDate(date, item)
+      });
+      if(idx !== -1){
+        // すでに選択済みの日にちを選んでいたら
+        const newArray = props.selectedDates.filter((item) => !checkDate(item, date));
+        props.setSelectedDates(newArray.sort((a, b) => a - b));
+      }else{
+        date.setHours(time.getHours());
+        date.setMinutes(time.getMinutes());
+        props.setSelectedDates([...props.selectedDates, date].sort((a, b) => a - b))
+      }
+      return;
     }
+    date.setHours(time.getHours());
+    date.setMinutes(time.getMinutes());
+    props.setSelectedDates([date]);
   }
 
   const openModal = () => {

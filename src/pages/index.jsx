@@ -24,7 +24,6 @@ export default function IndexPage(props){
       }
     }).then((res) => {
       const data = res.data;
-      console.log(data)
       setSchedules(data.schedules);
     }).catch((err) => {
       if(err.response.data === "Forbitton"){
@@ -67,7 +66,6 @@ export default function IndexPage(props){
 
   return (
     <div>
-      This is index page
       <ScheduleCalendar
         schedules={schedules}
         calendarBegin={calendarBegin}

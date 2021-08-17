@@ -27,18 +27,14 @@ export default function ScheduleView(props){
     // 変更処理
     const data = {
       title: title,
-      dates: selectedDates,
+      start_at: selectedDates[0].getTime(),
       tag: tag,
       memo: memo
-    }
-    console.log('変更')
+    };
     // 変更処理に書き換える
-    axios.post('/api/schedules', { data: data }).then((res) => {
+    axios.patch('/api/schedules/' + props.schedule.id, { data: data }).then((res) => {
       setModal(true);
-      setTag('');
-      setTitle('');
-      setMemo('');
-      setSelectedDates([new Date()]);
+      props.onUpdate(res.data.data);
     }).catch(err => {
       if(err.response.data === "Forbitton"){
         history.push('/login');
@@ -79,6 +75,7 @@ export default function ScheduleView(props){
             selectedDates={selectedDates}
             setSelectedDates={setSelectedDates}
             disabled={isLocked}
+            has_many={false}
           />
         </div>
         <div className={styles.mtLarge}>
