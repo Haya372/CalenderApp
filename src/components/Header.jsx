@@ -8,6 +8,7 @@ import styles from './Header.module.css';
 import { useSelector } from "react-redux";
 import Avatar from '@material-ui/core/Avatar';
 import { useHistory } from 'react-router';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 
 
 export default function Header(props) {
@@ -27,9 +28,10 @@ export default function Header(props) {
     <div>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={styles.title}>
+          <CalendarTodayIcon />
+          <div className={styles.title}>
             {props.text}
-          </Typography>
+          </div>
           { pictureUrl
           ? createAvatar()
           : <Button color="inherit" onClick={() => history.push('/login')}>ログイン</Button>

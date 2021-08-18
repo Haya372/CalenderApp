@@ -17,8 +17,14 @@ export default function LoginPage() {
   }
 
   return (
-  <Layout title="ログイン" home={false}>
-    <Button variant="contained" onClick={login}>LINEログイン</Button>
+  <Layout header="ログイン" home={false}>
+    <div style={{textAlign: "center", color: "#4caf50"}}>
+      <Button
+        variant="outlined"
+        onClick={login}
+        color="inherit"
+      >LINEログイン</Button>
+    </div>
   </Layout>
   )
 }
