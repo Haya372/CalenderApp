@@ -14,6 +14,7 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import Checkbox from '@material-ui/core/Checkbox';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './ScheduleView.module.css'
+import TagForm from "./TagForm.jsx";
 
 export default function ScheduleView(props){
   const history = useHistory();
@@ -73,17 +74,21 @@ export default function ScheduleView(props){
             削除
           </Button>
         </div>
-        <div className={styles.mt}>
-          <TextField
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            label="タイトル"
-            InputProps={{
-              readOnly: isLocked,
-            }}
-            required
-            fullWidth
-          />
+        <div className={`${styles.mt} ${styles.flexWrapper}`}>
+          <TagForm setTag={setTag} tag={tag} disabled={isLocked}/>
+          <div className={styles.flexGlow}>
+            <TextField
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              label="タイトル"
+              InputProps={{
+                readOnly: isLocked,
+              }}
+              required
+              fullWidth
+              error={title.length === 0}
+            />
+          </div>
         </div>
         <div className={styles.mt}>
           <CustomCalendar

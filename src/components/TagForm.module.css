@@ -1,0 +1,29 @@
+.modalCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 640px;
+  background-color: white;
+}
+
+.icon {
+  margin-right: 16px;
+}
+
+.color {
+  color: lightblue;
+  background-color: blue;
+}
+
+@media(max-width: 639px) {
+  .modalCenter {
+    width: 100%;
+    left: 0px;
+    transform: translate(0, -50%);
+  }
+
+.icon {
+  margin-right: 8px;
+}
+}
