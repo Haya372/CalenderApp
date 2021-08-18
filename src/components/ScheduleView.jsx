@@ -70,19 +70,21 @@ export default function ScheduleView(props){
             onClick={() => setConfirmModal(true)}
             disabled={isLocked}
           >
-            削除する
+            削除
           </Button>
         </div>
-        <TextField
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          label="タイトル"
-          InputProps={{
-            readOnly: isLocked,
-          }}
-          required
-          fullWidth
-        />
+        <div className={styles.mt}>
+          <TextField
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            label="タイトル"
+            InputProps={{
+              readOnly: isLocked,
+            }}
+            required
+            fullWidth
+          />
+        </div>
         <div className={styles.mt}>
           <CustomCalendar
             selectedDates={selectedDates}
@@ -111,16 +113,18 @@ export default function ScheduleView(props){
         : <div className={styles.buttonLayout}>
           <Button
             onClick={onClick}
-            variant="contained"
+            variant="outlined"
             color="primary"
             disabled={title.length === 0 || selectedDates.length === 0}
+            endIcon={<ArrowForwardIosIcon/>}
           >
-            変更する
+            変更
           </Button>
           <Button
             onClick={onClickCancel}
-            variant="contained"
+            variant="outlined"
             color="primary"
+            endIcon={<ArrowForwardIosIcon/>}
           >
             キャンセル
           </Button>
@@ -142,7 +146,7 @@ export default function ScheduleView(props){
                   size="small"
                   startIcon={<ArrowBackIosIcon />}
                 >
-                  ホームへ戻る
+                  ホームへ
                 </Button>
                 <Button
                   onClick={() => setModal(false)}
