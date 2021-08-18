@@ -99,7 +99,7 @@ export default function TagForm(props){
       ? <Modal setModal={closeModal}>
           <div className={styles.modalCenter}>
             <List>
-              <ListItem button onClick={(e) => onTagChange(e, "school")}>
+              <ListItem button onClick={(e) => onTagChange(e, "school")} selected={tag === "school"}>
                 <ListItemAvatar>
                   <Avatar className={classes.school}>
                     <SchoolIcon />
@@ -107,7 +107,7 @@ export default function TagForm(props){
                 </ListItemAvatar>
                 <ListItemText primary="学校" />
               </ListItem>
-              <ListItem button onClick={(e) => onTagChange(e, "work")}>
+              <ListItem button onClick={(e) => onTagChange(e, "work")} selected={tag === "work"}>
                 <ListItemAvatar>
                   <Avatar className={classes.work}>
                     <WorkIcon />
@@ -115,7 +115,7 @@ export default function TagForm(props){
                 </ListItemAvatar>
                 <ListItemText primary="仕事" />
               </ListItem>
-              <ListItem button onClick={(e) => onTagChange(e, "sports")}>
+              <ListItem button onClick={(e) => onTagChange(e, "sports")} selected={tag === "sports"}>
                 <ListItemAvatar>
                   <Avatar className={classes.sports}>
                     <SportsHandballIcon />
@@ -123,7 +123,7 @@ export default function TagForm(props){
                 </ListItemAvatar>
                 <ListItemText primary="運動" />
               </ListItem>
-              <ListItem button onClick={(e) => onTagChange(e, "hospital")}>
+              <ListItem button onClick={(e) => onTagChange(e, "hospital")} selected={tag === "hospital"}>
                 <ListItemAvatar>
                   <Avatar className={classes.hospital}>
                     <LocalHospitalIcon />
@@ -131,7 +131,7 @@ export default function TagForm(props){
                 </ListItemAvatar>
                 <ListItemText primary="病院" />
               </ListItem>
-              <ListItem button onClick={(e) => onTagChange(e, "trip")}>
+              <ListItem button onClick={(e) => onTagChange(e, "trip")} selected={tag === "trip"}>
                 <ListItemAvatar>
                   <Avatar className={classes.trip}>
                     <AirplanemodeActiveIcon />
@@ -139,7 +139,7 @@ export default function TagForm(props){
                 </ListItemAvatar>
                 <ListItemText primary="旅行" />
               </ListItem>
-              <ListItem button onClick={(e) => onTagChange(e, "important")}>
+              <ListItem button onClick={(e) => onTagChange(e, "important")} selected={tag === "important"}>
                 <ListItemAvatar>
                   <Avatar className={classes.important}>
                     <PriorityHighIcon />
