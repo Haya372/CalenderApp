@@ -1,10 +1,15 @@
 .flexWrapper {
   display: flex;
   justify-content: space-around;
+  align-items: flex-end;
 }
 
 .mt {
   margin-top: 16px;
+}
+
+.flexGlow {
+  flex-grow: 1;
 }
 
 .mtLarge {

@@ -25,6 +25,15 @@
   justify-content: space-around;
 }
 
+.flexWrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.flexGlow {
+  flex-grow: 1;
+}
+
 @media(max-width: 639px) {
   .modalCenter {
     width: 100%;

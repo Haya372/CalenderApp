@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import TextBox from "./TextBox.jsx";
 import CustomCalendar from "./CustomCalender.jsx"
 import TextField from '@material-ui/core/TextField';
 import styles from './AddForm.module.css';
@@ -11,14 +10,16 @@ import CardContent from '@material-ui/core/CardContent';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { useHistory } from "react-router";
+import TagForm from "./TagForm.jsx";
 
 export default function AddForm(props){
   const history = useHistory();
   const [title, setTitle] = useState('');
   const [selectedDates, setSelectedDates] = useState([new Date()]);
-  const [tag, setTag] = useState('');
+  const [tag, setTag] = useState('None');
   const [memo, setMemo] = useState('');
   const [modal, setModal] = useState(false);
+  const [titleValidation, setTitileValidation] = useState(false);
 
   const onClick = () => {
     // 提出処理
@@ -45,7 +46,22 @@ export default function AddForm(props){
   
   return (
     <div>
-      <TextBox value={title} onChange={(e) => setTitle(e.target.value)} />
+      <div className={styles.flexWrapper}>
+        <TagForm setTag={setTag} tag={tag} />
+        <div className={styles.flexGlow}>
+          <TextField
+            value={title}
+            onChange={(e) => {
+              setTitileValidation(e.target.value.length === 0);
+              setTitle(e.target.value);
+            }}
+            label="タイトル"
+            required
+            fullWidth
+            error={titleValidation}
+          />
+          </div>
+      </div>
       <div className={styles.mt}>
         <CustomCalendar
           selectedDates={selectedDates}
