@@ -86,6 +86,7 @@ export default function ScheduleCalendar(props){
         view="month"
         onActiveStartDateChange={onActiveStartDateChange}
         className={styles.calendar}
+        calendarType="US"
       />
       {modal ? 
       <Modal setModal={setModal}>
