@@ -1,5 +1,7 @@
 .wrapper {
-  padding: 16px;
+  padding: 16px 0;
+  width: 640px;
+  margin: auto;
 }
 
 .flexWrapper{
@@ -41,4 +43,12 @@
 }
 .card:hover {
   opacity: 0.7;
+}
+
+@media (max-width: 639px) {
+  .wrapper {
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
