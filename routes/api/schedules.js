@@ -6,6 +6,11 @@ const { db } = require('../../firebase/index');
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
+  // validation
+  if(!req.body.data.title || req.body.data.dates.length === 0){
+    res.status(400).send('Bad request');
+    return;
+  }
   create(req.session.user_id, req.body.data, (err) => {
     if(err){
       res.status(500).send('server error');
@@ -47,6 +52,10 @@ router.patch('/:schedule_id', function(req, res, next){
   const user_id = req.session.user_id;
   const schedule_id = req.params.schedule_id;
   const data = req.body.data;
+  if(!schedule_id || !data.title || !data.start_at){
+    res.status(400).send('Bad request');
+    return;
+  }
   const docRef = db.collection('datas').doc(user_id).collection('schedules');
   docRef.doc(schedule_id).set(data).then(() => {
     res.status(200).send({
@@ -62,6 +71,10 @@ router.patch('/:schedule_id', function(req, res, next){
 router.delete('/:schedule_id', function(req, res, next){
   const user_id = req.session.user_id;
   const schedule_id = req.params.schedule_id;
+  if(!schedule_id){
+    res.status(400).send('Bad request');
+    return;
+  }
   const docRef = db.collection('datas').doc(user_id).collection('schedules');
   docRef.doc(schedule_id).delete().then(() => {
     res.status(200).send({
