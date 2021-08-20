@@ -9,6 +9,10 @@ import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import Button from '@material-ui/core/Button';
 import styles from './user.module.css';
+import axios from 'axios';
+import { useDispatch } from "react-redux";
+import { setUser } from '../store/auth.js';
+import { useHistory } from "react-router";
 
 export default function UserPage(props){
   const name = useSelector((state) => state.user.name);
@@ -17,10 +21,32 @@ export default function UserPage(props){
   const [username, setUsername] = useState(name);
   const [isLocked, setIsLocked] = useState(true);
   const [lineNotify, setLineNotify] = useState(notify);
+  const dispach = useDispatch();
+  const history = useHistory();
+  const user_id = useSelector((state) => state.user.user_id);
 
   const onClick = () => {
     // 変更処理を追記
-    console.log('変更')
+    axios.patch('/api/user', {
+      data: {
+        name: username,
+        notify: lineNotify
+      }
+    }).then(res => {
+      dispach(setUser({
+        name: username,
+        user_id: user_id,
+        pictureUrl: pictureUrl,
+        notify: lineNotify
+      }));
+      setIsLocked(true);
+    }).catch(err => {
+      if(err.response.data === "Forbitton"){
+        history.push('/login');
+        return;
+      }
+      console.log(err.response);
+    })
   }
 
   const onClickCancel = () => {
@@ -30,7 +56,7 @@ export default function UserPage(props){
   }
 
   return(
-    <Layout>
+    <Layout header={name}>
       <div className={styles.lock}>
         <Checkbox
           checked={isLocked}
@@ -61,7 +87,7 @@ export default function UserPage(props){
         <Checkbox
           onChange={e => setLineNotify(e.target.checked)}
           color="primary"
-          value={lineNotify}
+          checked={lineNotify}
           disabled={isLocked}
         />
         <span className={isLocked ? styles.checkboxLocked : null}>LINEでの通知を有効化</span>

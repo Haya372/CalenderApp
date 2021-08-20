@@ -13,7 +13,8 @@ function create(user_data, cb) {
           user_id: newDoc.id,
           name: user_data.displayName,
           pictureUrl: user_data.pictureUrl,
-          createAccount: true
+          createAccount: true,
+          notify: false
         });
         console.log('create user: ', newDoc.id);
       })
