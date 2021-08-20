@@ -11,6 +11,7 @@ function exists(line_id, cb) {
         user_id: snapshot.docs[0].id,
         name: data.name,
         pictureUrl: data.pictureUrl,
+        notify: data.notify
       });
     }
   }).catch(e => console.log(e));

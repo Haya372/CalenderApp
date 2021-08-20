@@ -16,25 +16,6 @@ export default function IndexPage(props){
   const user_id = useSelector(state => state.user.user_id);
 
   useEffect(() => {
-    const year = calendarBegin.getFullYear();
-    const month = calendarBegin.getMonth();
-    axios.get('/api/schedules/', {
-      params: {
-        year: year,
-        month: month
-      }
-    }).then((res) => {
-      const data = res.data;
-      setSchedules(data.schedules);
-    }).catch((err) => {
-      if(err.response.data === "Forbitton"){
-        history.push('/login');
-      }
-      console.log(err)
-    });
-  }, [calendarBegin]);
-
-  useEffect(() => {
     // ログイン後はこのページに飛ばされるのでここで
     liff.init({liffId: process.env.LIFF_ID}).then(() => {
       if(liff.isLoggedIn() && !user_id){
@@ -60,6 +41,25 @@ export default function IndexPage(props){
       }
     })
   }, []);
+
+  useEffect(() => {
+    const year = calendarBegin.getFullYear();
+    const month = calendarBegin.getMonth();
+    axios.get('/api/schedules/', {
+      params: {
+        year: year,
+        month: month
+      }
+    }).then((res) => {
+      const data = res.data;
+      setSchedules(data.schedules);
+    }).catch((err) => {
+      if(err.response.data === "Forbitton"){
+        history.push('/login');
+      }
+      console.log(err)
+    });
+  }, [calendarBegin]);
 
   const onCalendarBeginChange = (newValue) => {
     setCalendarBegin(newValue);
