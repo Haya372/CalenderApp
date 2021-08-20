@@ -5,6 +5,7 @@ const initialState = {
   name: "",
   user_id: "",
   pictureUrl: "",
+  notify: false
 };
 
 // Sliceを生成する
@@ -16,6 +17,7 @@ const slice = createSlice({
       state.name = action.payload.name;
       state.user_id = action.payload.user_id;
       state.pictureUrl = action.payload.pictureUrl;
+      state.notify = action.payload.notify || false;
     }
   }
 });

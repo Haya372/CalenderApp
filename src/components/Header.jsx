@@ -18,7 +18,12 @@ export default function Header(props) {
   const createAvatar = () => {
     if(pictureUrl){
       return (
-        <Avatar alt="user_avatar" src={pictureUrl} />
+        <div onClick={() => history.push('/user')} className={styles.icon}>
+          <Avatar 
+            alt="user_avatar"
+            src={pictureUrl}
+          />
+        </div>
       )
     }
     return <AccountCircleTwoToneIcon />

@@ -8,6 +8,7 @@ import SchedulePage from "./pages/schedule.jsx";
 import { Provider } from "react-redux";
 import store from './store/index.js';
 import './styles.css';
+import UserPage from "./pages/user.jsx";
 
 const Index = () => {
   return (
@@ -24,6 +25,9 @@ const Index = () => {
         </Route>
         <Route path="/schedule/:id">
           <SchedulePage />
+        </Route>
+        <Route path="/user">
+          <UserPage />
         </Route>
         <div id="modal" />
       </Router>
