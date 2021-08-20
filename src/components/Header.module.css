@@ -5,6 +5,10 @@
   font-weight: 500;
 }
 
+.icon:hover {
+  opacity: 0.7;
+}
+
 @media(max-width: 639px){
   .title {
     margin: 0 8px;

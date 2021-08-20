@@ -62,7 +62,10 @@ export default function ScheduleView(props){
             checked={isLocked}
             icon={<LockOpenIcon />}
             checkedIcon={<LockIcon />}
-            onChange={(e) => setIsLocked(e.target.checked)}
+            onChange={(e) => {
+              if(e.target.checked) onClickCancel();
+              setIsLocked(e.target.checked)
+            }}
           />
           <Button
             variant="outlined"

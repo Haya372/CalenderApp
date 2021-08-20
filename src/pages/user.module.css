@@ -1,0 +1,49 @@
+.flexWrapper {
+  display: flex;
+  align-items: flex-end;
+  margin-top: 23px;
+}
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.lock {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.username {
+  flex-grow: 1;
+  margin-left: 24px;
+}
+
+.buttonLayout {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkboxLocked {
+  color: #bdbdbd;
+}
+
+@media(max-width: 639px) {
+  .buttonLayout {
+    margin-top: 16px;
+  }
+
+  .username {
+    margin-left: 16px;
+  }
+
+  .flexWrapper {
+    margin-top: 16px;
+  }
+
+  .flexCenter {
+    margin-top: 16px;
+  }
+}
